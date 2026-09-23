@@ -1,0 +1,267 @@
+:root{
+    --jx-red: #D96B73;
+    --jx-red-dark: #B94F59;
+    --jx-red-soft: #F7DDE0;
+    --jx-pink-soft: #FCECEF;
+    --jx-cream: #FFF9F8;
+    --jx-text: #3E3A3B;
+    --jx-muted: #7A7072;
+    --jx-border: #EEDCDF;
+    --jx-white: #FFFFFF;
+}
+
+/* ===== Paleta JumpXFitness: inspirada en el logo, pero en tonos pastel ===== */
+body{
+    color: var(--jx-text);
+    background: #FFF9F8;
+}
+
+.bg-info{
+    background-color: var(--jx-red) !important;
+}
+
+.text-info{
+    color: var(--jx-red-dark) !important;
+}
+
+.nav-link, .navbar-brand{
+    color: var(--jx-red-dark) !important;
+}
+
+.nav-link:hover, .navbar-brand:hover{
+    color: var(--jx-red) !important;
+}
+
+.btn-info,
+.btn-jx-primary{
+    background-color: var(--jx-red) !important;
+    border-color: var(--jx-red) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(217,107,115,.18);
+}
+
+.btn-info:hover,
+.btn-jx-primary:hover{
+    background-color: var(--jx-red-dark) !important;
+    border-color: var(--jx-red-dark) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+}
+
+.btn-outline-success{
+    border-color: var(--jx-red) !important;
+    color: var(--jx-red-dark) !important;
+    background: #fff !important;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:focus{
+    background-color: var(--jx-red-soft) !important;
+    border-color: var(--jx-red) !important;
+    color: var(--jx-red-dark) !important;
+}
+
+.btn-success{
+    background-color: var(--jx-red) !important;
+    border-color: var(--jx-red) !important;
+}
+
+.btn-success:hover{
+    background-color: var(--jx-red-dark) !important;
+    border-color: var(--jx-red-dark) !important;
+}
+
+.card{
+    border-color: var(--jx-border);
+}
+
+.card-header{
+    background-color: var(--jx-pink-soft) !important;
+    color: var(--jx-red-dark) !important;
+    border-bottom: 1px solid var(--jx-border);
+    font-weight: 700;
+}
+
+.badge-plan{
+    background-color: var(--jx-red-soft) !important;
+    color: var(--jx-red-dark) !important;
+}
+
+.hero-jx{
+    background: linear-gradient(135deg, #EFA2A8 0%, #D96B73 100%);
+    color: #fff;
+    padding: 64px 0;
+}
+
+.hero-jx h1{ font-weight: 700; }
+
+.hero-jx .btn-cta{
+    background-color: #fff;
+    border-color: #fff;
+    color: var(--jx-red-dark);
+    font-weight: 700;
+}
+
+.hero-jx .btn-cta:hover{
+    background-color: var(--jx-cream);
+    border-color: var(--jx-cream);
+}
+
+.plan-card{
+    border: 1px solid var(--jx-border);
+    box-shadow: 0 4px 16px rgba(80,45,50,.07);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.plan-card .precio{
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--jx-red-dark);
+}
+
+.section-title{
+    color: var(--jx-red-dark);
+    font-weight: 700;
+}
+
+.estado-pill{
+    font-size:.75rem;
+    padding:.35em .7em;
+    border-radius:999px;
+}
+
+/* ===== Barra superior: SOLO móvil/tablet ===== */
+#jx-mobile-topbar{
+    display: none !important;
+    background: rgba(255,255,255,.97) !important;
+    border-bottom: 1px solid var(--jx-border);
+    box-shadow: 0 3px 16px rgba(80,45,50,.08);
+    backdrop-filter: blur(8px);
+}
+
+#jx-mobile-topbar a{
+    color: var(--jx-text) !important;
+}
+
+#jx-mobile-topbar .fw-bold{
+    color: var(--jx-red-dark) !important;
+    letter-spacing: .2px;
+}
+
+#jx-mobile-topbar img{
+    background: var(--jx-text);
+    padding: 3px;
+    border-radius: 10px !important;
+}
+
+#jx-mobile-topbar .btn{
+    color: var(--jx-red-dark) !important;
+    border: 1px solid var(--jx-border) !important;
+    background: var(--jx-pink-soft) !important;
+    border-radius: 10px;
+    width: 42px;
+    height: 38px;
+}
+
+#jx-mobile-topbar .btn:hover{
+    background: var(--jx-red-soft) !important;
+}
+
+/* Mostrar la barra superior únicamente en pantallas menores a 992px.
+   En escritorio se mantiene completamente oculta. */
+@media (max-width: 991.98px){
+    #jx-mobile-topbar{
+        display: flex !important;
+    }
+}
+
+/* ===== Menú lateral ===== */
+#jxSidebar{
+    background: #FFF9F8 !important;
+    border-right: 1px solid var(--jx-border);
+    box-shadow: 5px 0 24px rgba(80,45,50,.06);
+}
+
+#jxSidebar .jx-brand-block{
+    background: linear-gradient(180deg, #FCECEF 0%, #FFF9F8 100%);
+}
+
+#jxSidebar .jx-brand-block img{
+    background: var(--jx-text);
+    padding: 5px;
+    border-radius: 14px !important;
+}
+
+#jxSidebar .jx-brand-name{
+    color: var(--jx-text) !important;
+    letter-spacing: .3px;
+}
+
+#jxSidebar .jx-brand-subtitle{
+    color: var(--jx-red-dark) !important;
+}
+
+#jxSidebar .nav-link{
+    color: #655D5F !important;
+    border-radius: 11px;
+    font-weight: 600;
+    padding: .72rem .85rem;
+    transition: .18s ease;
+}
+
+#jxSidebar .nav-link:hover{
+    background: var(--jx-pink-soft) !important;
+    color: var(--jx-red-dark) !important;
+}
+
+#jxSidebar .nav-link.active,
+#jxSidebar .nav-link:active{
+    background: var(--jx-red-soft) !important;
+    color: var(--jx-red-dark) !important;
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 var(--jx-red);
+}
+
+#jxSidebar .border-top,
+#jxSidebar .border-bottom{
+    border-color: var(--jx-border) !important;
+}
+
+#jxSidebar .dropdown-toggle{
+    color: var(--jx-red-dark) !important;
+    border-color: var(--jx-border) !important;
+    background: #fff !important;
+    border-radius: 10px;
+}
+
+#jxSidebar .dropdown-toggle:hover{
+    background: var(--jx-pink-soft) !important;
+}
+
+#jxSidebar .dropdown-menu{
+    background: #fff;
+    border: 1px solid var(--jx-border) !important;
+}
+
+#jx-sidebar-backdrop{
+    background: rgba(62,58,59,.28) !important;
+}
+
+.form-control,
+.form-select{
+    border-color: #E7D9DB;
+    border-radius: 10px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color: #E7A1A8;
+    box-shadow: 0 0 0 .2rem rgba(217,107,115,.12);
+}
+
+.table thead th{
+    background: var(--jx-pink-soft);
+    color: var(--jx-red-dark);
+    border-bottom-color: var(--jx-border);
+}

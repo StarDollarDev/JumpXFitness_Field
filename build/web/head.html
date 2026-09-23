@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+
+<style>
+    :root {
+        --sidebar-width: 250px;
+        --mobile-topbar-height: 56px;
+        --jx-navy: #0B3D62;
+        --jx-orange: #F5A623;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        background: #f4f6f9;
+    }
+    main { flex: 1 0 auto; }
+    footer { flex-shrink: 0; }
+
+    /* Sidebar: fijo a la izquierda, oculto (fuera de pantalla) por defecto */
+    #jxSidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: var(--sidebar-width);
+        background: var(--jx-navy);
+        z-index: 1045;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+    }
+    #jxSidebar .nav-link {
+        color: #e8f0f7;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+    #jxSidebar .nav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+    #jxSidebar .nav-link.active,
+    #jxSidebar .nav-link:active {
+        background: var(--jx-orange) !important;
+        color: var(--jx-navy) !important;
+        font-weight: 700;
+    }
+
+    #jx-sidebar-backdrop {
+        display: none;
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,.45);
+        z-index: 1040;
+    }
+
+    #jx-mobile-topbar {
+        display: flex;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: var(--mobile-topbar-height);
+        background: var(--jx-navy);
+        z-index: 1035;
+    }
+
+    body { padding-top: var(--mobile-topbar-height); }
+
+    /* Sidebar abierto en móvil */
+    #jxSidebar.show { transform: translateX(0); }
+    #jx-sidebar-backdrop.show { display: block; }
+
+    /* Pantallas grandes: sidebar siempre visible, sin topbar móvil */
+    @media (min-width: 992px) {
+        body { padding-top: 0; padding-left: var(--sidebar-width); }
+        #jxSidebar { transform: none; }
+        #jx-mobile-topbar { display: none; }
+        #jx-sidebar-backdrop { display: none !important; }
+    }
+
+    /* Pantalla de carga: tapa la página mientras se autentica o se traen los
+       datos iniciales, para no mostrar un panel a medio cargar (0, S/ 0.00, etc.) */
+    #jx-loading-overlay {
+        display: none;
+        position: fixed; inset: 0;
+        background: #fff;
+        z-index: 2000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    body.jx-show-loading #jx-loading-overlay { display: flex; }
+    #jx-loading-overlay img { width: 84px; height: 84px; border-radius: 14px; object-fit: cover; }
+    #jx-loading-overlay .spinner-border { color: var(--jx-orange); }
+    #jx-loading-overlay p { color: var(--jx-navy); font-weight: 600; margin: 0; }
+</style>

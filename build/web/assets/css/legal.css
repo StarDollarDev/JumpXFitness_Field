@@ -1,0 +1,95 @@
+/* Páginas de soporte y legales: Nosotros, Términos, Libro de Reclamaciones, Políticas de datos */
+
+.legal-hero {
+    padding: 56px 0 40px;
+    background: linear-gradient(135deg, #f7dde0 0%, #efa2a8 48%, #d96b73 100%);
+    color: #fff;
+}
+.legal-hero .breadcrumb-link {
+    color: rgba(255,255,255,.85);
+    text-decoration: none;
+    font-size: .9rem;
+}
+.legal-hero .breadcrumb-link:hover { color: #fff; text-decoration: underline; }
+.legal-hero h1 {
+    margin-top: 10px;
+    font-weight: 900;
+    letter-spacing: -.03em;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+}
+.legal-hero p { color: rgba(255,255,255,.92); max-width: 700px; margin-top: 8px; }
+
+.legal-wrap { padding: 48px 0 72px; background: #fff9f8; }
+
+.legal-content {
+    background: #fff;
+    border: 1px solid var(--jx-border, #eedcdf);
+    border-radius: 18px;
+    padding: 36px clamp(20px, 4vw, 48px);
+    color: var(--jx-text, #3e3a3b);
+    line-height: 1.5;
+}
+.legal-content h2 {
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--jx-red-dark, #b94f59);
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+.legal-content h2:first-child { margin-top: 0; }
+.legal-content h3 { font-weight: 700; font-size: 1.05rem; margin-top: 20px; }
+.legal-content p, .legal-content li { line-height: 1.5; color: var(--jx-text, #3e3a3b); }
+.legal-content ul, .legal-content ol { padding-left: 1.3rem; }
+.legal-content .legal-updated {
+    display: inline-block;
+    font-size: .82rem;
+    color: var(--jx-muted, #7a7072);
+    background: var(--jx-pink-soft, #fcecef);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 18px;
+}
+.legal-content table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+.legal-content table th, .legal-content table td {
+    border: 1px solid var(--jx-border, #eedcdf);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: .92rem;
+}
+.legal-content table th { background: var(--jx-pink-soft, #fcecef); }
+
+/* Nosotros */
+.about-grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin: 8px 0 4px; }
+.about-grid-cards .card-tile {
+    background: var(--jx-pink-soft, #fcecef);
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+}
+.about-grid-cards .card-tile i { font-size: 1.7rem; color: var(--jx-red-dark, #b94f59); }
+.about-grid-cards .card-tile h4 { margin: 10px 0 4px; font-weight: 800; font-size: 1rem; }
+.about-grid-cards .card-tile p { font-size: .9rem; color: var(--jx-muted,#7a7072); margin: 0; }
+
+.testimonial-card {
+    background: #fff;
+    border: 1px solid var(--jx-border,#eedcdf);
+    border-radius: 16px;
+    padding: 20px;
+    height: 100%;
+}
+.testimonial-card p.quote { font-style: italic; color: var(--jx-text,#3e3a3b); }
+.testimonial-card .author { font-weight: 800; color: var(--jx-red-dark,#b94f59); font-size: .9rem; }
+
+/* Formulario Libro de Reclamaciones */
+.reclamo-section-title {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--jx-red-dark,#b94f59);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    border-bottom: 2px solid var(--jx-pink-soft,#fcecef);
+    padding-bottom: 8px;
+    margin: 28px 0 16px;
+}
+.reclamo-section-title:first-of-type { margin-top: 6px; }
+.form-check-terms { background: var(--jx-pink-soft,#fcecef); border-radius: 12px; padding: 14px 16px; margin-top: 18px; }

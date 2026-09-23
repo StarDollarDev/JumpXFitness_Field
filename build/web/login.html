@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso administrador | JumpxFitness</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <div id="head-placeholder"></div>
+</head>
+<body>
+    <div id="jx-loading-overlay">
+        <img src="assets/img/logo.png" alt="JumpxFitness">
+        <div class="spinner-border" role="status"></div>
+        <p>Cargando acceso administrativo...</p>
+    </div>
+    <header id="header-placeholder"></header>
+    <main>
+        <div class="d-flex align-items-center justify-content-center px-3" style="min-height: 90vh;">
+            <div class="card shadow-sm border-0" style="max-width: 420px; width: 100%;">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <img src="assets/img/logo.png" alt="JumpxFitness" class="rounded-3 mb-2" style="width: 90px; height: 90px; object-fit: cover;">
+                        <h4 class="fw-bold mt-2">Panel administrativo</h4>
+                        <p class="text-muted small mb-0">Acceso exclusivo para administradores</p>
+                    </div>
+                    <form id="form-login">
+                        <div class="mb-3">
+                            <label for="usuario" class="form-label">Usuario</label>
+                            <input id="usuario" type="text" name="usuario" class="form-control" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input id="password" type="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-info w-100 fw-bold">Ingresar</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="index.html" class="small text-decoration-none">← Volver a JumpxFitness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="footer-placeholder"></footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

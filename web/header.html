@@ -1,0 +1,44 @@
+<!-- Barra superior: solo visible en móvil/tablet (pantallas < 992px) -->
+<div id="jx-mobile-topbar" class="d-flex align-items-center justify-content-between px-3">
+    <a class="d-flex align-items-center text-decoration-none" href="admin_dashboard.html">
+        <img src="assets/img/logo.png" alt="JumpxFitness" height="34" class="rounded me-2">
+        <span class="fw-bold text-white">JumpxFitness</span>
+    </a>
+    <button class="btn btn-outline-light btn-sm" type="button" onclick="toggleSidebar()">
+        <i class="bi bi-list fs-4 lh-1"></i>
+    </button>
+</div>
+
+<!-- Fondo oscuro al abrir el menú en móvil -->
+<div id="jx-sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<nav id="jxSidebar" class="d-flex flex-column">
+    <div class="text-center py-4 px-3 border-bottom border-light border-opacity-25">
+        <img src="assets/img/logo.png" alt="JumpxFitness" class="rounded-3 mb-2" style="width: 84px; height: 84px; object-fit: cover;">
+        <div class="fw-bold text-white">JumpxFitness</div>
+        <div class="small" style="color:#F5A623;">Panel de administración</div>
+    </div>
+
+    <ul class="nav nav-pills flex-column px-2 pt-3 gap-1 d-none" id="admin-nav-links">
+        <li class="nav-item"><a class="nav-link" href="admin_dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_planes.html"><i class="bi bi-list-check me-2"></i>Planes</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_registros.html"><i class="bi bi-clipboard2-check me-2"></i>Registros</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_reservas.html"><i class="bi bi-calendar2-check me-2"></i>Reservas</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_productos.html"><i class="bi bi-box-seam me-2"></i>Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_ventas.html"><i class="bi bi-cart-check me-2"></i>Ventas</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_usuarios.html"><i class="bi bi-person-badge me-2"></i>Administradores</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_auditoria.html"><i class="bi bi-shield-lock me-2"></i>Auditoría</a></li>
+    </ul>
+
+    <div class="mt-auto p-3 border-top border-light border-opacity-25 d-none" id="user-profile">
+        <div class="dropdown">
+            <button class="btn btn-outline-light btn-sm dropdown-toggle w-100 text-start" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle me-2"></i><span id="user-name">Admin</span>
+            </button>
+            <ul class="dropdown-menu w-100 shadow border-0">
+                <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

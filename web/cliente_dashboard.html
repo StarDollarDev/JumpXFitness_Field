@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi plan | JumpxFitness</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <div id="head-placeholder"></div>
+</head>
+<body class="jx-show-loading">
+    <div id="jx-loading-overlay">
+        <img src="assets/img/logo.png" alt="JumpxFitness">
+        <div class="spinner-border" role="status"></div>
+        <p>Cargando tu plan...</p>
+    </div>
+    <header id="header-placeholder"></header>
+    <main class="container mt-5 mb-5" style="max-width: 760px;">
+        <h2 class="section-title mb-4"><i class="bi bi-person-badge me-2"></i>Mi plan</h2>
+
+        <div class="card shadow border-0 mb-4">
+            <div class="card-body p-4" id="plan-actual-box">
+                <!-- se llena por JS -->
+            </div>
+        </div>
+
+        <div class="card shadow border-0">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-phone me-2"></i>Renovar o comprar un plan con Yape</h5>
+                <p class="text-muted small">
+                    1) Escanea el QR o yapea al número del negocio por el monto del plan elegido.
+                    2) Escribe aquí el código de operación que te muestra tu app de Yape.
+                    3) Un administrador confirmará tu pago apenas lo verifique; tu plan se actualizará en ese momento
+                    (no es instantáneo, no hay una API pública de Yape para confirmarlo automáticamente).
+                </p>
+
+                <div class="text-center my-3">
+                    <img src="assets/img/yape-qr.png" alt="QR de Yape de JumpxFitness"
+                         style="max-width: 220px; width: 100%;" class="rounded-3 border p-2"
+                         onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'border rounded-3 p-4 text-muted small', textContent:'Coloca aquí el QR de Yape del negocio (assets/img/yape-qr.png)'}));">
+                </div>
+
+                <div id="pago-alert" class="alert d-none" role="alert"></div>
+
+                <form id="form-pago-yape" class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-7">
+                            <label class="form-label" for="pago-plan">Plan a pagar *</label>
+                            <select class="form-select" id="pago-plan" required></select>
+                            <div class="invalid-feedback">Selecciona un plan.</div>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label" for="pago-celular">Tu número de Yape *</label>
+                            <input type="text" class="form-control" id="pago-celular" required minlength="7" maxlength="20">
+                            <div class="invalid-feedback">Ingresa el número desde el que pagaste.</div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="pago-codigo">Código de operación *</label>
+                            <input type="text" class="form-control" id="pago-codigo" required minlength="4" maxlength="30" placeholder="Ej. 000123456">
+                            <div class="invalid-feedback">Ingresa el código de tu comprobante de Yape.</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-jx-primary w-100 fw-bold mt-3" id="pago-submit">Enviar comprobante</button>
+                </form>
+
+                <hr class="my-4">
+                <h6 class="fw-bold">Tus solicitudes recientes</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped align-middle">
+                        <thead><tr><th>Fecha</th><th>Plan</th><th>Monto</th><th>Código</th><th>Estado</th></tr></thead>
+                        <tbody id="tabla-mis-pagos"><tr><td colspan="5" class="text-muted">Cargando...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="footer-placeholder"></footer>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/pages/cliente_dashboard.js"></script>
+</body>
+</html>

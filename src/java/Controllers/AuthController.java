@@ -1,6 +1,7 @@
 package Controllers;
 
 import Dao.ClienteDaoImpl;
+import Dao.PersonaDaoImpl;
 import Dao.UsuarioDaoImpl;
 import Interface.IUsuario;
 import Model.Cliente;
@@ -36,6 +37,7 @@ public class AuthController extends HttpServlet {
 
     private final IUsuario uDao = new UsuarioDaoImpl();
     private final ClienteDaoImpl clienteDao = new ClienteDaoImpl();
+    private final PersonaDaoImpl personaDao = new PersonaDaoImpl();
     private final Gson gson = new Gson();
 
     private static final Pattern PASSWORD_VALIDA = Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{8,}$");
@@ -209,6 +211,14 @@ public class AuthController extends HttpServlet {
 
         if (uDao.SearchByUsername(usuarioTxt) != null) {
             fallar(out, jsonResponse, "Ese nombre de usuario ya está en uso.");
+            return;
+        }
+        if (personaDao.existeNumeroDoc(numeroDoc)) {
+            fallar(out, jsonResponse, "Ese número de documento ya está registrado.");
+            return;
+        }
+        if (personaDao.existeTelefono(telefono)) {
+            fallar(out, jsonResponse, "Ese número de teléfono ya está en uso.");
             return;
         }
 

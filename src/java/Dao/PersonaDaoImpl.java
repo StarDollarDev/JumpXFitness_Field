@@ -211,6 +211,33 @@ public class PersonaDaoImpl implements IPersona {
     
     }
 
+    @Override
+    public boolean existeNumeroDoc(String numeroDoc) {
+        return existeValor("SELECT 1 FROM persona WHERE numero_Doc = ?", numeroDoc);
+    }
+
+    @Override
+    public boolean existeTelefono(String telefono) {
+        return existeValor("SELECT 1 FROM persona WHERE telefono = ?", telefono);
+    }
+
+    private boolean existeValor(String query, String valor) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            cn = ConexionSqlSingleton.getConnection();
+            st = cn.prepareStatement(query);
+            st.setString(1, valor);
+            rs = st.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            System.out.println("Error al verificar existencia: " + e.getMessage());
+            return false;
+        } finally {
+            cerrarRecursos(rs, st);
+        }
+    }
+
     private void cerrarRecursos(ResultSet rs, PreparedStatement st) {
         try {
             if (rs != null) {

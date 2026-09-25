@@ -38,7 +38,7 @@ public class AuthController extends HttpServlet {
     private final ClienteDaoImpl clienteDao = new ClienteDaoImpl();
     private final Gson gson = new Gson();
 
-    private static final Pattern USUARIO_VALIDO = Pattern.compile("^[a-zA-Z0-9._-]{4,40}$");
+    private static final Pattern PASSWORD_VALIDA = Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{8,}$");
     private static final Pattern PHONE = Pattern.compile("^[0-9+() \\-]{7,20}$");
 
     @Override
@@ -178,12 +178,16 @@ public class AuthController extends HttpServlet {
         String numeroDoc = limpiar(request, "numeroDoc");
         String telefono = limpiar(request, "telefono");
 
-        if (!USUARIO_VALIDO.matcher(usuarioTxt).matches()) {
-            fallar(out, jsonResponse, "El usuario debe tener entre 4 y 40 caracteres (letras, números, punto, guion o guion bajo).");
+        if (usuarioTxt.length() < 4 || usuarioTxt.length() > 40) {
+            fallar(out, jsonResponse, "El usuario debe tener entre 4 y 40 caracteres.");
             return;
         }
-        if (password.length() < 6 || password.length() > 72) {
-            fallar(out, jsonResponse, "La contraseña debe tener al menos 6 caracteres.");
+        if (!PASSWORD_VALIDA.matcher(password).matches()) {
+            fallar(out, jsonResponse, "La contraseña debe tener al menos 8 caracteres, con al menos una mayúscula y un número.");
+            return;
+        }
+        if (password.length() > 72) {
+            fallar(out, jsonResponse, "La contraseña es demasiado larga (máximo 72 caracteres).");
             return;
         }
         if (nombre.length() < 2 || nombre.length() > 60 || apellido.length() < 2 || apellido.length() > 60) {

@@ -31,9 +31,21 @@
         }
         .jx-auth-pane { display: none; }
         .jx-auth-pane.active { display: block; }
+
+        /* Esta pantalla es de acceso público (login/registro): no debe
+           mostrar el sidebar ni el espacio reservado para él. */
+        body.jx-auth-page #jxSidebar,
+        body.jx-auth-page #jx-mobile-topbar,
+        body.jx-auth-page #jx-sidebar-backdrop {
+            display: none !important;
+        }
+        body.jx-auth-page {
+            padding-left: 0 !important;
+            padding-top: 0 !important;
+        }
     </style>
 </head>
-<body>
+<body class="jx-auth-page">
     <div id="jx-loading-overlay">
         <img src="assets/img/logo.png" alt="JumpxFitness">
         <div class="spinner-border" role="status"></div>
@@ -76,7 +88,6 @@
                             <div class="mb-3">
                                 <label class="form-label">Tipo de cuenta</label>
                                 <input type="text" class="form-control" value="Cliente" disabled>
-                                <div class="form-text">El registro público solo crea cuentas de cliente. Las cuentas de administrador se asignan internamente.</div>
                             </div>
                             <div class="row g-2">
                                 <div class="col-md-6">
@@ -105,12 +116,14 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="reg-usuario" class="form-label">Usuario *</label>
-                                    <input id="reg-usuario" type="text" class="form-control" required minlength="4" maxlength="40" pattern="[a-zA-Z0-9._-]+">
-                                    <div class="form-text">Solo letras, números, punto, guion o guion bajo.</div>
+                                    <input id="reg-usuario" type="text" class="form-control" required minlength="4" maxlength="40">
                                 </div>
                                 <div class="col-12">
                                     <label for="reg-password" class="form-label">Contraseña *</label>
-                                    <input id="reg-password" type="password" class="form-control" required minlength="6">
+                                    <input id="reg-password" type="password" class="form-control" required minlength="8"
+                                           pattern="(?=.*[A-Z])(?=.*\d).{8,}"
+                                           title="Debe tener al menos 8 caracteres, una mayúscula y un número">
+                                    <div class="form-text">Mínimo 8 caracteres, con al menos una mayúscula y un número.</div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-jx-primary w-100 fw-bold mt-3">Crear cuenta</button>

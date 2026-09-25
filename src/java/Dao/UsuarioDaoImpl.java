@@ -64,44 +64,76 @@ public class UsuarioDaoImpl implements IUsuario {
         return lista;
     }
 
+    /**
+     * Inserta persona + usuario en UNA sola transacción: si el insert de
+     * usuario falla por cualquier motivo (ej. un CHECK de rol, un usuario
+     * duplicado, lo que sea), se revierte también el insert de persona.
+     * Antes cada insert se confirmaba solo (autocommit) y una falla a
+     * mitad de camino dejaba una "persona" huérfana sin usuario asociado,
+     * que además bloqueaba reintentar el registro con el mismo documento
+     * (ORA-00001 en la restricción única de persona.numero_doc).
+     */
     @Override
     public boolean insertar(Usuario usuario) {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        boolean resultado = false;
-        try {
-            cn = ConexionSqlSingleton.getConnection();
+        Connection conexion = ConexionSqlSingleton.getConnection();
 
-            // Insertar persona
-            boolean personaInsert = personaDAO.insertSoloPersona(usuario.getPersona(), null);
-            if (!personaInsert) {
-                return false;
-            }
+        // La app entera comparte una sola Connection (sin pool), así que
+        // sincronizamos para que dos registros al mismo tiempo no mezclen
+        // sus transacciones entre sí.
+        synchronized (conexion) {
+            boolean autoCommitOriginal = true;
+            PreparedStatement st = null;
+            ResultSet rs = null;
+            try {
+                autoCommitOriginal = conexion.getAutoCommit();
+                conexion.setAutoCommit(false);
 
-            String query = "INSERT INTO usuario (usuario, contrasena, rol, id_persona) "
-                    + "VALUES (?, ?, ?, ?)";
-            st = cn.prepareStatement(query, new String[]{"id_usuario"});
-            st.setString(1, usuario.getUsuario());
-            st.setString(2, asegurarHash(usuario.getContraseña()));
-            st.setString(3, usuario.getRol().name());
-            st.setInt(4, usuario.getPersona().getId_persona());
+                boolean personaInsert = personaDAO.insertSoloPersona(usuario.getPersona(), null);
+                if (!personaInsert) {
+                    conexion.rollback();
+                    return false;
+                }
 
-            int r = st.executeUpdate();
-            resultado = r > 0;
+                String query = "INSERT INTO usuario (usuario, contrasena, rol, id_persona) "
+                        + "VALUES (?, ?, ?, ?)";
+                st = conexion.prepareStatement(query, new String[]{"id_usuario"});
+                st.setString(1, usuario.getUsuario());
+                st.setString(2, asegurarHash(usuario.getContraseña()));
+                st.setString(3, usuario.getRol().name());
+                st.setInt(4, usuario.getPersona().getId_persona());
 
-            if (resultado) {
+                int r = st.executeUpdate();
+                if (r == 0) {
+                    conexion.rollback();
+                    return false;
+                }
+
                 rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     usuario.setId_usuario(rs.getInt(1));
                 }
+
+                conexion.commit();
                 System.out.println("Usuario registrado correctamente con ID: " + usuario.getId_usuario());
+                return true;
+
+            } catch (Exception e) {
+                System.out.println("Error al insertar usuario: " + e.getMessage());
+                try {
+                    conexion.rollback();
+                } catch (SQLException ex) {
+                    System.out.println("Error al revertir la transacción: " + ex.getMessage());
+                }
+                return false;
+            } finally {
+                cerrarRecursos(rs, st);
+                try {
+                    conexion.setAutoCommit(autoCommitOriginal);
+                } catch (SQLException ex) {
+                    System.out.println("Error al restaurar autoCommit: " + ex.getMessage());
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Error al insertar usuario: " + e.getMessage());
-        } finally {
-            cerrarRecursos(rs, st);
         }
-        return resultado;
     }
 
     @Override
